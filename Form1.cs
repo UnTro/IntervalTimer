@@ -22,12 +22,12 @@ namespace IntervalTimer
         private bool isRunning = false;
         private DateTime nextBeepTime;
 
-        public Form1()
+        public Form1(    )
         {
-             FormInitializeComponent();
+             FormInitializeComponent( );
         }
 
-        private void  FormInitializeComponent()
+        private void  FormInitializeComponent( )
         {
             this.titleLabel = new System.Windows.Forms.Label();
             this.minutesLabel = new System.Windows.Forms.Label();
@@ -128,7 +128,7 @@ namespace IntervalTimer
             this.addTimerButton.UseVisualStyleBackColor = true;
             this.addTimerButton.Click += new System.EventHandler(this.AddTimer_Click);
             // Form1
-            this.ClientSize = new System.Drawing.Size(284, 218);
+            this.ClientSize = new System.Drawing.Size(500, 218);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.testSoundButton);
             this.Controls.Add(this.stopButton);
@@ -196,8 +196,14 @@ namespace IntervalTimer
         }
         private void AddTimer_Click(object sender, EventArgs e)
         {
-            var newTimer = new Form1();
-            newTimer.MdiParent = this;
+            Form1 childForm = new Form1(); // The form you want to embed
+            childForm.TopLevel = false;    // Important: allows embedding
+            childForm.FormBorderStyle = FormBorderStyle.None; // Remove borders
+            childForm.Dock = DockStyle.Fill; // Optional: fill the parent container
+
+            this.Controls.Add(childForm); // Add to current form's controls
+            childForm.BringToFront();
+            childForm.Show();
         }
 
         private void TimerLoop(object state)

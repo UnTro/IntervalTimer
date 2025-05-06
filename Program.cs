@@ -17,7 +17,7 @@ namespace IntervalTimer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new Form1() { IsMdiContainer = true });
+            Application.Run(new Form1( ) { IsMdiContainer = true });
         }
     }
 }
