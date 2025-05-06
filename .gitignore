@@ -414,5 +414,5 @@ obj/
 .idea/
 #Nuget packages folder
 packages/
-/Properties/
+ 
 /ignore
