@@ -1,6 +1,8 @@
-﻿namespace IntervalTimer
+﻿using System.Windows.Forms;
+
+namespace IntervalTimer
 {
-    partial class Form1
+    partial class Form1 : Form
     {
         /// <summary>
         /// Required designer variable.

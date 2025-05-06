@@ -11,21 +11,23 @@ namespace IntervalTimer
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button testSoundButton;
+        private System.Windows.Forms.Button addTimerButton;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Label minutesLabel;
+        
 
         private System.Windows.Forms.Timer uiUpdateTimer;
         private Thread timerThread;
         private bool isRunning = false;
         private DateTime nextBeepTime;
 
-        public Form1()
+        public Form1(    )
         {
-            FormInitializeComponent();
+             FormInitializeComponent( );
         }
 
-        private void FormInitializeComponent()
+        private void  FormInitializeComponent( )
         {
             this.titleLabel = new System.Windows.Forms.Label();
             this.minutesLabel = new System.Windows.Forms.Label();
@@ -33,13 +35,16 @@ namespace IntervalTimer
             this.startButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
             this.testSoundButton = new System.Windows.Forms.Button();
+            this.addTimerButton = new System.Windows.Forms.Button();
             this.statusLabel = new System.Windows.Forms.Label();
             this.uiUpdateTimer = new System.Windows.Forms.Timer();
+            
 
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumeric)).BeginInit();
             this.SuspendLayout();
 
             // titleLabel
+            #region
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.titleLabel.Location = new System.Drawing.Point(85, 20);
@@ -48,16 +53,18 @@ namespace IntervalTimer
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "Interval Timer";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+            #endregion
             // minutesLabel
+            #region
             this.minutesLabel.AutoSize = true;
             this.minutesLabel.Location = new System.Drawing.Point(50, 70);
             this.minutesLabel.Name = "minutesLabel";
             this.minutesLabel.Size = new System.Drawing.Size(90, 15);
             this.minutesLabel.TabIndex = 1;
             this.minutesLabel.Text = "Minutes:";
-
+            #endregion
             // minutesNumeric
+            #region
             this.minutesNumeric.Location = new System.Drawing.Point(150, 68);
             this.minutesNumeric.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
             this.minutesNumeric.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
@@ -65,8 +72,9 @@ namespace IntervalTimer
             this.minutesNumeric.Size = new System.Drawing.Size(80, 23);
             this.minutesNumeric.TabIndex = 2;
             this.minutesNumeric.Value = new decimal(new int[] { 3, 0, 0, 0 });
-
+            #endregion
             // startButton
+            #region
             this.startButton.Location = new System.Drawing.Point(50, 110);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(80, 30);
@@ -74,8 +82,9 @@ namespace IntervalTimer
             this.startButton.Text = "Start Timer";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.StartButton_Click);
-
+            #endregion
             // stopButton
+            #region
             this.stopButton.Enabled = false;
             this.stopButton.Location = new System.Drawing.Point(150, 110);
             this.stopButton.Name = "stopButton";
@@ -84,8 +93,9 @@ namespace IntervalTimer
             this.stopButton.Text = "Stop Timer";
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
-
+            #endregion
             // testSoundButton
+            #region
             this.testSoundButton.Location = new System.Drawing.Point(100, 150);
             this.testSoundButton.Name = "testSoundButton";
             this.testSoundButton.Size = new System.Drawing.Size(80, 30);
@@ -93,8 +103,9 @@ namespace IntervalTimer
             this.testSoundButton.Text = "Test Sound";
             this.testSoundButton.UseVisualStyleBackColor = true;
             this.testSoundButton.Click += new System.EventHandler(this.TestSoundButton_Click);
-
+            #endregion
             // statusLabel
+            #region
             this.statusLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.statusLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.statusLabel.Location = new System.Drawing.Point(0, 195);
@@ -103,13 +114,21 @@ namespace IntervalTimer
             this.statusLabel.TabIndex = 6;
             this.statusLabel.Text = "Ready";
             this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-
+#endregion
             // uiUpdateTimer
             this.uiUpdateTimer.Interval = 500;
             this.uiUpdateTimer.Tick += new System.EventHandler(this.UiUpdateTimer_Tick);
 
+            //addTimer
+            this.addTimerButton.Location = new System.Drawing.Point(50, 150);
+            this.addTimerButton.Name = "addTimer";
+            this.addTimerButton.Size = new System.Drawing.Size(80, 35);
+            this.addTimerButton.TabIndex = 7;
+            this.addTimerButton.Text = "Add Timer";
+            this.addTimerButton.UseVisualStyleBackColor = true;
+            this.addTimerButton.Click += new System.EventHandler(this.AddTimer_Click);
             // Form1
-            this.ClientSize = new System.Drawing.Size(284, 218);
+            this.ClientSize = new System.Drawing.Size(500, 218);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.testSoundButton);
             this.Controls.Add(this.stopButton);
@@ -117,6 +136,7 @@ namespace IntervalTimer
             this.Controls.Add(this.minutesNumeric);
             this.Controls.Add(this.minutesLabel);
             this.Controls.Add(this.titleLabel);
+            this.Controls.Add(this.addTimerButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -128,6 +148,7 @@ namespace IntervalTimer
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
 
         private void StartButton_Click(object sender, EventArgs e)
         {
@@ -153,6 +174,7 @@ namespace IntervalTimer
             // Start UI update timer
             uiUpdateTimer.Start();
         }
+      
 
         private void StopButton_Click(object sender, EventArgs e)
         {
@@ -171,6 +193,17 @@ namespace IntervalTimer
         private void TestSoundButton_Click(object sender, EventArgs e)
         {
             PlaySound();
+        }
+        private void AddTimer_Click(object sender, EventArgs e)
+        {
+            Form1 childForm = new Form1(); // The form you want to embed
+            childForm.TopLevel = false;    // Important: allows embedding
+            childForm.FormBorderStyle = FormBorderStyle.None; // Remove borders
+            childForm.Dock = DockStyle.Fill; // Optional: fill the parent container
+
+            this.Controls.Add(childForm); // Add to current form's controls
+            childForm.BringToFront();
+            childForm.Show();
         }
 
         private void TimerLoop(object state)
